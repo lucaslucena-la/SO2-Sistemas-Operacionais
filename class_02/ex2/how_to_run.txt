@@ -1,0 +1,12 @@
+
+for the assembly object code:
+
+    riscv64-linux-gnu-as -o echo.o echo.s
+
+for calling the linker:
+
+    riscv64-linux-gnu-ld -o echo.x echo.o
+
+else :
+
+    riscv64-linux-gnu-gcc

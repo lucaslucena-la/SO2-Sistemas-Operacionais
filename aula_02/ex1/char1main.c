@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-
-
-
 char first_char(char *s);
 
 int main() {

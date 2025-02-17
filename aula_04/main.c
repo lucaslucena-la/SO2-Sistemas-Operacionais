@@ -1,28 +1,20 @@
-// inicio do programa
-#include "types.h"
-#include "defs.h"
+//copiar o caracter para a posição de memória do UART (0x1000000)
+
+#define UART_REG 0x10000000
+void putc(char c){
+    volatile char *reg = (char*)  UART_REG;
+    *reg = c;
+}
+
 
 void puts(char *s){
     while(*s){
-        uartputc(*s++);
-        
+        putc(*s++);
     }
 }
 
+// inicio do programa
 void entry(){
-    int c;
+    puts("- Olá mundo, disse o kernel");
 
-    puts(" \u26f0 LOS - Lucena Operating System\n");
-
-    //1. obter o caracter do teclado
-    //2. se o caracter for diferente de -1, enviar o caracter para o terminal
-    //3. faz outra coisa qualquer
-
-    while(1){
-        c = uartgetc();
-        if(c != -1){
-            uartputc(c);
-        }
-    }
 }
-

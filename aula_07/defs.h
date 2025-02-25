@@ -4,3 +4,4 @@ void uartputc(int c);
 int uartgetc();
 void uart_init();
 int perimetro(int , ...);
+void printf(char *, ...);

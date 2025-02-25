@@ -15,6 +15,9 @@ OBJ = boot.o \
 	  main.o \
 	  uart.o \
 	  perimetro.o \
+	  printf.o
+
+
 kernel: $(OBJ)
 	$(LD) $(LDFLAGS) -o kernel $(OBJ)
 	

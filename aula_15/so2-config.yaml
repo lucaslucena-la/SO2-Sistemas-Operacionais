@@ -1,0 +1,34 @@
+#cloud-config
+# Configuração para máquina RISC-V usada nas aulas de SO2 e LOC
+package_update: true
+
+apt_pipelining: False
+
+packages: 
+  - git
+  - zsh
+  - gcc-riscv64-linux-gnu
+  - device-tree-compiler
+  - build-essential 
+  - gdb-multiarch 
+  - qemu-system-misc
+  - qemu-user-static
+
+runcmd:
+  # - sudo hostnamectl set-hostname riscv
+  - su ubuntu -c 'sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+
+  - sudo chsh -s $(which zsh) ubuntu
+  - export ZSH=/home/ubuntu/.oh-my-zsh
+  - export ZSH_CUSTOM="$ZSH/custom"
+
+  # Escolhe um tema oh-my-zsh
+  - sed 's/^ZSH_THEME=.*/ZSH_THEME="dpoggi"/' /home/ubuntu/.zshrc > /home/ubuntu/tmp.zsh
+  - mv /home/ubuntu/tmp.zsh  /home/ubuntu/.zshrc
+  # # Instala plugins
+  - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+  - git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  - sed  's/^plugins=.*/plugins=(git z zsh-autosuggestions zsh-syntax-highlighting)/' /home/ubuntu/.zshrc > /home/ubuntu/tmp.zsh 
+  - mv /home/ubuntu/tmp.zsh /home/ubuntu/.zshrc
+
+final_message: "O sistema está configurado, depois de $UPTIME segundos. Para acesso: multipass shell <hostname>"

@@ -5,6 +5,7 @@
         "proc.h": "c",
         "console.h": "c",
         "memlayout.h": "c",
-        "types.h": "c"
+        "snake.h": "c",
+        "uart.h": "c"
     }
 }

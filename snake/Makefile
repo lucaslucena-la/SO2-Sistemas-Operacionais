@@ -20,10 +20,9 @@ OBJ = boot.o \
 	  memory.o \
 	  trap_handler.o \
 	  trap.o \
-	  syscall.o \
-	  plic.o \
-	  console.o 
-	  
+	  syscall.o\
+	  snake.o
+
 kernel: $(OBJ)
 	$(LD) $(LDFLAGS) -o kernel $(OBJ)
 	

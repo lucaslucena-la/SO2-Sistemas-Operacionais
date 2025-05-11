@@ -17,12 +17,11 @@ void puts(char *s) {
 
 void main() {
     int c; // caractere
-    uart_init(); // Configura o dispositivo de comunicação serial UART
+    uart_init(); // Inicializa UART
 
     puts(CLS
         TOP_LEFT 
-        //emoji do pato
-        "\U0001F986"
+        "\U0001F986"  // emoji do pato
         PURPLE 
         BOLD 
         " POS -  Patos Operating System \U0001F525 \n"
@@ -41,18 +40,43 @@ void main() {
             c = uart_getchar();
 
             if (c == 'J' || c == 'j') {
-                run_snake_game();
-            } else if (c == 'Q' || c == 'q') {
+                // Submenu de dificuldade
+                puts("\nEscolha a dificuldade:\n");
+                puts("  [1] Lento\n");
+                puts("  [2] Normal\n");
+                puts("  [3] Rápido\n");
+
+                while (1) {
+                    if (uart_haschar()) {
+                        char opt = uart_getchar();
+                        if (opt == '1') {
+                            sleep_time = 25000000;
+                            break;
+                        } else if (opt == '2') {
+                            sleep_time = 10000000;
+                            break;
+                        } else if (opt == '3') {
+                            sleep_time = 6000000;
+                            break;
+                        } else {
+                            puts("Opção inválida. Pressione 1, 2 ou 3.\n");
+                        }
+                    }
+                }
+
+                run_snake_game();  // Inicia o jogo após definir dificuldade
+            } 
+            else if (c == 'Q' || c == 'q') {
                 printf("Saindo...\n");
                 for (;;);  // trava sistema
-            } else {
+            } 
+            else {
                 printf("Opção inválida. Pressione 'J' para jogar ou 'Q' para sair.\n");
             }
         }
     }
-
-    
 }
+
 
 void entry() {
     // Queremos executar a função main no modo S

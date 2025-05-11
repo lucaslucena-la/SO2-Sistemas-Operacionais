@@ -6,6 +6,7 @@
         "console.h": "c",
         "memlayout.h": "c",
         "snake.h": "c",
-        "uart.h": "c"
+        "uart.h": "c",
+        "riscv.h": "c"
     }
 }
